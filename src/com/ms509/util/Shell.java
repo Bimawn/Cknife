@@ -238,11 +238,13 @@ public class Shell {
 		}
 
 		try {
-			tmp = URLEncoder.encode(z1, code) + "&"+Safe.PARAM2+"=" + URLEncoder.encode(z2, code);
+			//tmp = URLEncoder.encode(z1, code) + "&"+Safe.PARAM2+"=" + URLEncoder.encode(z2, code);
+			tmp = URLEncoder.encode(z1, code) + "&"+Safe.PARAM2+"=" + (new BASE64Encoder().encode(z22)).toString();
 		} catch (UnsupportedEncodingException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
+		//tmp = URLEncoder.encode(z1, code) + "&"+Safe.PARAM2+"=" + (new BASE64Encoder().encode(z22)).toString();
 		params = Common.makeParams(Safe.JSP_MAKE, Safe.JSP_SHELL, tmp);
 		params = params + "&code=" + code;
 		String[] index_datas = Common.send(url, params, code).split("\t");
@@ -256,6 +258,7 @@ public class Shell {
 		}
 		re[1] = Arrays.toString(index_datas).substring(Arrays.toString(index_datas).indexOf("[S]") + 3,
 				Arrays.toString(index_datas).indexOf("[E]"));
+		System.out.println(re);
 		return re;
 	}
 	private String[] execute_cus(String command) {
