@@ -104,7 +104,9 @@ public class FileManager {
 				}
 				break;
 			case "JSP(Eval)":
-				param2 = URLEncoder.encode(data, this.code);
+				BASE64Encoder encode = new BASE64Encoder();
+				param2 = encode.encode(data.getBytes(this.code));
+				param2 = URLEncoder.encode(param2, this.code);
 				break;
 			case "Customize":
 				param2 = URLEncoder.encode(data, this.code);
